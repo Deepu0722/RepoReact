@@ -1,7 +1,9 @@
-import react,{useState} from 'react'
-
+import react, { useState } from 'react';
+import ReactModal from 'react-modal';
 import DataTable from './component/task1';
+import ModalPopup from './component/modal-popup';
 
+ReactModal.setAppElement('#root');
 function App() { 
   const cList=[
     {
@@ -25,21 +27,24 @@ function App() {
     }
 ]
 const[contactList, updatedList] = useState(cList)
-function addContact(){
+const [modalIsOpen, setModalIsOpen] = useState(false)
 
-}
+
 function deletContact(e){
   console.log(e.target.getAttribute('contact'))
   let contactKey = e.target.getAttribute('contact')
-  updatedList(contactList.filter(contact => contact.fname != contactKey
-             ))
+  updatedList(contactList.filter(contact => contact.fname !== contactKey))
+}
+function getChildData(datafromChild){
+  console.log(`DATA ON SUBMIT from child: ${datafromChild}`)
+  contactList.push(datafromChild);
 }
 function viewContact(e){}
   return (
     <div className="App">
       
       <ul>
-      <button onClick={addContact()}>Add</button>
+        <button onClick={()=> setModalIsOpen(true)}>Add</button>
         {
            contactList.map((contact, index) => {
            return(
@@ -47,13 +52,20 @@ function viewContact(e){}
                <button onClick={deletContact} contact={contact.fname}>Delete</button>
                <button onClick={viewContact} contact={contact.fname}>View</button>
                <DataTable contact={contact} key={contact.fname}></DataTable> 
-          
-          </li>
+           </li>
            )
-            
-        })} 
+           })
+        } 
      </ul>
- 
+      <ReactModal isOpen={modalIsOpen} style={
+       { overlay:{background: 'grey'}, content:{color:'blue'} }
+       }>
+       <h1>Add Contact</h1>
+       <ModalPopup passChildData = {getChildData} ></ModalPopup>
+       <button onClick={()=> setModalIsOpen(false)}>close</button>
+     </ReactModal>
+     
+     
     </div>
   )
 }
