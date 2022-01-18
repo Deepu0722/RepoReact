@@ -64,6 +64,9 @@ function viewContact(e){}
        <ModalPopup passChildData = {getChildData} ></ModalPopup>
        <button onClick={()=> setModalIsOpen(false)}>close</button>
      </ReactModal>
+     <ReactModal isOpen={false} style={{overlay:{background:'grey'},content:{color:'Orange'}}}>
+        
+     </ReactModal>
      
      
     </div>
