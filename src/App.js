@@ -62,10 +62,21 @@ function getChildData(datafromChild){
         {
            contactList.map((contact, index) => {
            return(
-           <li>
-               <button onClick={deletContact} contact={contact.fname}>Delete</button>
-               <button onClick={viewContact} contact={contact.fname}>View</button>
-               <DataTable contact={contact} key={contact.fname}></DataTable> 
+           <li> 
+               <table><tbody>
+                   <tr>
+                       <td>
+                       <DataTable contact={contact} key={contact.fname}>
+                       </DataTable> 
+                       </td>
+                       <td><button onClick={deletContact} contact={contact.fname}>Delete</button></td>
+                       <td> <button onClick={viewContact} contact={contact.fname}>View</button></td>
+                     </tr>
+                 </tbody></table>
+               
+              
+              
+               
            </li>
            )
            })
