@@ -27,15 +27,12 @@ class ModalPopup extends Component {
         
     }
 
-    render(){
-    
-     let conDetails   = this.state;
-     
+    render(){   
+     let conDetails   = this.state;    
      return(
          <div> 
              <form onSubmit={this.submitHandler}>
             {  
-              
               Object.keys(conDetails).map((item) => {
                    return (
                        <div>
@@ -46,7 +43,7 @@ class ModalPopup extends Component {
                })
               
             }
-            <input type='submit' /> 
+            <input type='submit'/> 
             </form>
          </div>
      )

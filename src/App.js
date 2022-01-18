@@ -31,7 +31,13 @@ const[contactList, updatedList] = useState(cList)
 const [modalIsOpen, setModalIsOpen] = useState(false)
 const [viewList, setViewList] = useState(contactList)
 const [viewContactModalIsOpen, setViewContactModalIsOpen] = useState(false)
-
+let texts = {
+  addBtn: 'Add New Contact',
+  deleteBtn: 'Delete',
+  viewBtn: 'View',
+  closeBtn: 'close',
+  addHeader: 'Enter Contact Details'
+}
 
 function deletContact(e){
  // console.log(e.target.getAttribute('contact'))
@@ -58,45 +64,36 @@ function getChildData(datafromChild){
     <div className="App">
       
       <ul>
-        <button onClick={()=> setModalIsOpen(true)}>Add</button>
+        <button onClick={()=> setModalIsOpen(true)}>{texts.addBtn}</button>
         {
            contactList.map((contact, index) => {
            return(
            <li> 
-               <table><tbody>
+               <table>
+                 <tbody>
                    <tr>
                        <td>
-                       <DataTable contact={contact} key={contact.fname}>
-                       </DataTable> 
-                       </td>
-                       <td><button onClick={deletContact} contact={contact.fname}>Delete</button></td>
-                       <td> <button onClick={viewContact} contact={contact.fname}>View</button></td>
+                       <DataTable contact={contact} key={contact.fname}/></td>
+                       <td><button onClick={deletContact} contact={contact.fname}>{texts.deleteBtn}</button></td>
+                       <td> <button onClick={viewContact} contact={contact.fname}>{texts.viewBtn}</button></td>
                      </tr>
-                 </tbody></table>
-               
-              
-              
-               
+                 </tbody>
+                 </table>   
            </li>
            )
            })
         } 
      </ul>
-      <ReactModal isOpen={modalIsOpen} style={
-       { overlay:{background: 'grey'}, content:{color:'blue'} }
-       }>
-       <h1>Add Contact</h1>
-       <ModalPopup passChildData = {getChildData} ></ModalPopup>
-       <button onClick={onCloseHandler}>close</button>
+      <ReactModal isOpen={modalIsOpen} style={{ overlay:{background: 'grey'}, content:{color:'blue'} }}>
+          <h1>{texts.addHeader}</h1>
+          <ModalPopup passChildData = {getChildData} ></ModalPopup>
+          <button onClick={onCloseHandler}>close</button>
      </ReactModal>
      <ReactModal isOpen={viewContactModalIsOpen} style={{overlay:{background:'grey'},content:{color:'Orange'}}}>
-       
-        <ViewComp viewData = {viewList}></ViewComp>
-        <button onClick={()=> setViewContactModalIsOpen(false)}>close</button>
+         <ViewComp viewData = {viewList}></ViewComp>
+         <button onClick={()=> setViewContactModalIsOpen(false)}>{texts.closeBtn}</button>
      </ReactModal>
-     
-     
-    </div>
+   </div>
   )
 }
 
