@@ -1,6 +1,4 @@
-
 import React, {Component} from 'react';
-
 
 class ModalPopup extends Component {
     constructor(props){
@@ -44,7 +42,7 @@ class ModalPopup extends Component {
                            <label>{item}</label> <input type='text' name={item} value={item.values} onChange={this.handleChange}/>
                        </div>
                    ) 
-                //    <div> {item} {item.values} </div>
+             
                })
               
             }
